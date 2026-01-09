@@ -1,0 +1,613 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: #F0F0F0;
+    min-height: 100vh;
+    padding: 20px;
+    color: #333333;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+header {
+    background: white;
+    color: #333333;
+    padding: 24px 30px;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+header h1 {
+    font-size: 1.75em;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: #333333;
+}
+
+.subtitle {
+    font-size: 0.95em;
+    color: #666666;
+}
+
+.controls {
+    padding: 20px 30px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    background: white;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.file-input-wrapper,
+.folder-input-wrapper {
+    position: relative;
+}
+
+.file-input-wrapper input[type="file"],
+.folder-input-wrapper input[type="file"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.file-input-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: #4A90E2;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.95em;
+    transition: all 0.2s ease;
+    border: none;
+}
+
+.file-input-label:hover {
+    background: #3A7BC8;
+}
+
+.file-input-icon {
+    font-size: 1.2em;
+}
+
+.btn-clear {
+    padding: 10px 20px;
+    background: white;
+    color: #666666;
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.95em;
+    transition: all 0.2s ease;
+}
+
+.btn-clear:hover {
+    background: #F8F8F8;
+    border-color: #D0D0D0;
+    color: #333333;
+}
+
+.info-bar {
+    padding: 16px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.info-bar #fileCount {
+    color: #666666;
+    font-size: 0.9em;
+}
+
+.view-mode {
+    display: flex;
+    gap: 5px;
+}
+
+.view-btn {
+    padding: 6px 14px;
+    border: none;
+    background: #F0F0F0;
+    color: #666666;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.9em;
+    transition: all 0.2s ease;
+}
+
+.view-btn:hover {
+    background: #E0E0E0;
+}
+
+.view-btn.active {
+    background: #333333;
+    color: white;
+}
+
+.gallery {
+    padding: 24px 30px;
+    min-height: 400px;
+    background: white;
+}
+
+.gallery.grid-view {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.gallery.list-view {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.folder-group {
+    margin-bottom: 20px;
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.folder-header {
+    padding: 14px 20px;
+    background: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid #E0E0E0;
+    user-select: none;
+}
+
+.folder-header:hover {
+    background: #F8F8F8;
+}
+
+.folder-icon {
+    font-size: 1.3em;
+}
+
+.folder-name {
+    font-weight: 500;
+    color: #333333;
+    flex: 1;
+    font-size: 0.95em;
+}
+
+.folder-count {
+    color: #999999;
+    font-size: 0.85em;
+}
+
+.btn-copy-scss {
+    padding: 6px 14px;
+    background: white;
+    color: #4A90E2;
+    border: 1px solid #E0E0E0;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.85em;
+    transition: all 0.2s ease;
+    margin-left: 10px;
+}
+
+.btn-copy-scss:hover {
+    background: #F8F8F8;
+    border-color: #D0D0D0;
+    color: #3A7BC8;
+}
+
+.folder-toggle {
+    color: #666666;
+    font-weight: 500;
+    font-size: 0.85em;
+    transition: transform 0.2s ease;
+    margin-left: auto;
+}
+
+.folder-content {
+    padding: 16px 20px;
+    background: #FAFAFA;
+}
+
+.grid-view .folder-content {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 15px;
+}
+
+.list-view .folder-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 80px 20px;
+    color: #999999;
+}
+
+.empty-icon {
+    font-size: 4em;
+    margin-bottom: 20px;
+    opacity: 0.5;
+}
+
+.empty-state p {
+    font-size: 1em;
+    margin-bottom: 8px;
+    color: #666666;
+}
+
+.empty-hint {
+    font-size: 0.9em;
+    color: #999999;
+}
+
+.svg-item {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: 1px solid #E0E0E0;
+}
+
+.svg-item:hover {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+    border-color: #D0D0D0;
+}
+
+.grid-view .svg-item {
+    display: inline-grid;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    width: 50px;
+    /* height: auto; */
+    gap: 5px;
+    column-span: 20px;
+    margin: 5px;
+}
+
+.list-view .svg-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.svg-preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    background: white;
+}
+
+.list-view .svg-preview {
+    width: 150px;
+    min-height: 120px;
+    flex-shrink: 0;
+    border-bottom: none;
+    border-right: 1px solid #e0e0e0;
+}
+
+.svg-preview img,
+.svg-preview svg {
+    /* max-height: 100px; */
+    width: 24px;
+    height: auto;
+    object-fit: contain;
+    height: 24px;
+}
+
+.svg-info {
+    display: none;
+    padding: 15px;
+    flex: 1;
+}
+
+.svg-filename {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+    word-break: break-word;
+    display: none;
+}
+
+.svg-size {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    animation: fadeIn 0.2s;
+}
+
+.lightbox.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.lightbox-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    text-align: center;
+}
+
+.lightbox-content img,
+.lightbox-content svg {
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+}
+
+.lightbox-info {
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.lightbox-close:hover {
+    color: #ff6b6b;
+    transform: scale(1.2);
+}
+
+.lightbox-prev,
+.lightbox-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 20px;
+    user-select: none;
+    transition: all 0.3s ease;
+}
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
+    color: #667eea;
+    transform: translateY(-50%) scale(1.2);
+}
+
+.lightbox-prev {
+    left: 20px;
+}
+
+.lightbox-next {
+    right: 20px;
+}
+
+.code-popup {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.2s;
+}
+
+.code-popup.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.code-popup-content {
+    background: white;
+    border-radius: 8px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.code-popup-close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    color: #666666;
+    font-size: 28px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 10;
+    line-height: 1;
+}
+
+.code-popup-close:hover {
+    color: #333333;
+}
+
+.code-popup-title {
+    padding: 20px 20px 16px;
+    margin: 0;
+    font-size: 1.25em;
+    font-weight: 500;
+    color: #333333;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.code-section {
+    padding: 16px 20px;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.code-section:last-child {
+    border-bottom: none;
+}
+
+.code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.code-header span {
+    font-weight: 500;
+    color: #333333;
+    font-size: 0.95em;
+}
+
+.btn-copy-code {
+    padding: 6px 14px;
+    background: #4A90E2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.85em;
+    transition: all 0.2s ease;
+}
+
+.btn-copy-code:hover {
+    background: #3A7BC8;
+}
+
+/* .code-block {
+    background: #2d2d2d;
+    border: 1px solid #E0E0E0;
+    border-radius: 6px;
+    padding: 12px;
+    margin: 0;
+    overflow-x: auto;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.85em;
+    line-height: 1.6;
+    color: #f8f8f2;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+} */
+
+/* Override Prism theme colors để phù hợp với dark theme */
+.code-block.token {
+    background: #2d2d2d !important;
+}
+
+pre {
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.8em;
+    }
+
+    .controls {
+        flex-direction: column;
+    }
+
+    .file-input-label,
+    .btn-clear {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .grid-view .folder-content {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+    }
+
+    .lightbox-prev,
+    .lightbox-next {
+        font-size: 30px;
+        padding: 10px;
+    }
+
+    .code-popup-content {
+        max-width: 95%;
+        max-height: 95vh;
+    }
+
+    .code-popup-title {
+        font-size: 1.2em;
+        padding: 15px 15px 10px;
+    }
+
+    .code-section {
+        padding: 15px;
+    }
+
+    .code-header span {
+        font-size: 1em;
+    }
+
+    .btn-copy-code {
+        padding: 6px 12px;
+        font-size: 0.85em;
+    }
+
+    .code-block {
+        font-size: 0.8em;
+        padding: 12px;
+    }
+}
+

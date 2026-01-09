@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG Image Viewer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🖼️ SVG Image Viewer</h1>
+            <p class="subtitle">View and browse SVG files</p>
+        </header>
+
+        <div class="controls">
+            <div class="file-input-wrapper">
+                <input type="file" id="fileInput" multiple accept=".svg" />
+                <label for="fileInput" class="file-input-label">
+                    <span class="file-input-icon">📁</span>
+                    Select SVG Files
+                </label>
+            </div>
+            <div class="folder-input-wrapper">
+                <input type="file" id="folderInput" webkitdirectory directory multiple />
+                <label for="folderInput" class="file-input-label">
+                    <span class="file-input-icon">📂</span>
+                    Select Folder
+                </label>
+            </div>
+            <button id="clearBtn" class="btn-clear">🗑️ Clear All</button>
+        </div>
+
+        <div class="info-bar">
+            <span id="fileCount">0 files selected</span>
+            <span id="viewMode" class="view-mode">
+                <button id="gridViewBtn" class="view-btn active">⊞ Grid</button>
+                <!-- <button id="listViewBtn" class="view-btn">☰ List</button> -->
+            </span>
+        </div>
+
+        <div id="gallery" class="gallery grid-view">
+            <div class="empty-state">
+                <div class="empty-icon">📷</div>
+                <p>No SVG files selected</p>
+                <p class="empty-hint">Use the "Select SVG Files" or "Select Folder" button above to get started</p>
+            </div>
+        </div>
+
+        <div id="lightbox" class="lightbox">
+            <span class="lightbox-close">&times;</span>
+            <span class="lightbox-prev">&#10094;</span>
+            <span class="lightbox-next">&#10095;</span>
+            <div class="lightbox-content">
+                <img id="lightbox-img" src="" alt="">
+                <div class="lightbox-info">
+                    <span id="lightbox-filename"></span>
+                    <span id="lightbox-index"></span>
+                </div>
+            </div>
+        </div>
+
+        <div id="codePopup" class="code-popup">
+            <div class="code-popup-content">
+                <span class="code-popup-close">&times;</span>
+                <h3 class="code-popup-title">Code for icon</h3>
+                
+                <div class="code-section">
+                    <div class="code-header">
+                        <span>HTML</span>
+                        <button class="btn-copy-code" data-copy-type="html">📋 Copy HTML</button>
+                    </div>
+                    <pre><code id="code-html" class="code-block language-html"></code></pre>
+                </div>
+
+                <div class="code-section">
+                    <div class="code-header">
+                        <span>SCSS</span>
+                        <button class="btn-copy-code" data-copy-type="scss">📋 Copy SCSS</button>
+                    </div>
+                    <pre><code id="code-scss" class="code-block language-scss"></code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-scss.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
