@@ -254,6 +254,12 @@ class SVGViewer {
         if (iconPreview) {
             iconPreview.src = svg.content;
             iconPreview.alt = svg.name;
+            // Add dark background if filename contains "white"
+            if (svg.name.toLowerCase().includes('white')) {
+                iconPreview.classList.add('has-white');
+            } else {
+                iconPreview.classList.remove('has-white');
+            }
         }
         if (filenameDisplay) {
             filenameDisplay.textContent = svg.name;
@@ -413,9 +419,12 @@ class SVGViewer {
                         ${files.map(svg => {
                             // Find index of file in svgFiles array
                             const index = this.svgFiles.findIndex(f => f === svg);
+                            // Check if filename contains "white" for dark background
+                            const hasWhite = svg.name.toLowerCase().includes('white');
+                            const previewClass = hasWhite ? 'svg-preview has-white' : 'svg-preview';
                             return `
                                 <div class="svg-item" data-index="${index}">
-                                    <div class="svg-preview">
+                                    <div class="${previewClass}">
                                         <img src="${svg.content}" alt="${svg.name}" onerror="this.parentElement.innerHTML='<div style=\\'padding:20px;color:#999\\'>Error loading SVG</div>'">
                                     </div>
                                     <div class="svg-info">
