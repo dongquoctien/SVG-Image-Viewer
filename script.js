@@ -248,6 +248,17 @@ class SVGViewer {
         const htmlCode = this.generateHTML(svg);
         const scssCode = this.generateSingleSCSS(svg);
         
+        // Set icon preview image and filename
+        const iconPreview = document.getElementById('code-popup-icon');
+        const filenameDisplay = document.getElementById('code-popup-filename');
+        if (iconPreview) {
+            iconPreview.src = svg.content;
+            iconPreview.alt = svg.name;
+        }
+        if (filenameDisplay) {
+            filenameDisplay.textContent = svg.name;
+        }
+        
         const htmlElement = document.getElementById('code-html');
         const scssElement = document.getElementById('code-scss');
         
