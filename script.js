@@ -190,9 +190,17 @@ class SVGViewer {
             const className = fileName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
             
             // Create background path
-            const bgPath = folderPath === 'Root' || folderPath === 'Standalone Files' 
-                ? `/assets/${svg.name}`
-                : `/assets/${folderPath}/${svg.name}`;
+            let bgPath;
+            if (folderPath === 'Root' || folderPath === 'Standalone Files') {
+                bgPath = `/assets/${svg.name}`;
+            } else {
+                // Check if folderPath already starts with "assets/"
+                if (folderPath.startsWith('assets/')) {
+                    bgPath = `/${folderPath}/${svg.name}`;
+                } else {
+                    bgPath = `/assets/${folderPath}/${svg.name}`;
+                }
+            }
             
             // Use actual size from SVG (rendered size)
             const width = svg.width || 24;
@@ -216,9 +224,17 @@ class SVGViewer {
         
         // Create background path
         const folderPath = svg.folderPath;
-        const bgPath = folderPath === 'Root' || folderPath === 'Standalone Files' 
-            ? `/assets/${svg.name}`
-            : `/assets/${folderPath}/${svg.name}`;
+        let bgPath;
+        if (folderPath === 'Root' || folderPath === 'Standalone Files') {
+            bgPath = `/assets/${svg.name}`;
+        } else {
+            // Check if folderPath already starts with "assets/"
+            if (folderPath.startsWith('assets/')) {
+                bgPath = `/${folderPath}/${svg.name}`;
+            } else {
+                bgPath = `/assets/${folderPath}/${svg.name}`;
+            }
+        }
         
         // Use actual size from SVG (rendered size)
         const width = svg.width || 24;
