@@ -194,9 +194,11 @@ class SVGViewer {
             if (folderPath === 'Root' || folderPath === 'Standalone Files') {
                 bgPath = `/assets/${svg.name}`;
             } else {
-                // Check if folderPath already starts with "assets/"
-                if (folderPath.startsWith('assets/')) {
-                    bgPath = `/${folderPath}/${svg.name}`;
+                // Extract path starting from "assets/" if it exists anywhere in the path
+                const assetsIndex = folderPath.indexOf('assets/');
+                if (assetsIndex !== -1) {
+                    // Use path starting from "assets/"
+                    bgPath = `/${folderPath.substring(assetsIndex)}/${svg.name}`;
                 } else {
                     bgPath = `/assets/${folderPath}/${svg.name}`;
                 }
@@ -228,9 +230,11 @@ class SVGViewer {
         if (folderPath === 'Root' || folderPath === 'Standalone Files') {
             bgPath = `/assets/${svg.name}`;
         } else {
-            // Check if folderPath already starts with "assets/"
-            if (folderPath.startsWith('assets/')) {
-                bgPath = `/${folderPath}/${svg.name}`;
+            // Extract path starting from "assets/" if it exists anywhere in the path
+            const assetsIndex = folderPath.indexOf('assets/');
+            if (assetsIndex !== -1) {
+                // Use path starting from "assets/"
+                bgPath = `/${folderPath.substring(assetsIndex)}/${svg.name}`;
             } else {
                 bgPath = `/assets/${folderPath}/${svg.name}`;
             }
